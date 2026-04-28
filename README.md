@@ -75,8 +75,8 @@ ui/
 
 ## 🤝 Contributing
 
-We welcome contributions! Check the GitHub issues for the current roadmap.
+We welcome contributions! See the [contributing guide](https://github.com/KubeOrch/.github/blob/main/CONTRIBUTING.md).
 
 ## 📄 License
 
-Apache License 2.0 - see [LICENSE](LICENSE) file for details.
+[Apache 2.0](LICENSE)
