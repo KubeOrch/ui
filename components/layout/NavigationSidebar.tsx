@@ -200,8 +200,11 @@ export function NavigationSidebar() {
 
         <SidebarFooter className="border-t border-sidebar-border p-4">
           <div className="flex items-center gap-2 text-xs text-sidebar-foreground/60">
-            <div className="h-2 w-2 rounded-full bg-green-500" />
-            <span>All systems operational</span>
+            <div
+              className="h-2 w-2 rounded-full bg-sidebar-foreground/40"
+              aria-hidden="true"
+            />
+            <span>Status not checked</span>
           </div>
         </SidebarFooter>
       </Sidebar>
