@@ -29,6 +29,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useAuthStore } from "@/stores/AuthStore";
 import api from "@/lib/api";
+import { getApiBaseUrl } from "@/lib/runtime-config";
 import { useRouter } from "next/navigation";
 import { ProviderIcon } from "@/components/auth/ProviderIcon";
 import type { AuthMethodsResponse } from "@/lib/types/auth";
@@ -117,7 +118,7 @@ export function LoginForm() {
   };
 
   const handleOAuthLogin = (providerName: string) => {
-    window.location.href = `${api.defaults.baseURL}/auth/oauth/${providerName}/authorize`;
+    window.location.href = `${getApiBaseUrl()}/auth/oauth/${providerName}/authorize`;
   };
 
   if (authMethodsLoading) {

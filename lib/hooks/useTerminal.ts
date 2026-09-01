@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useAuthStore } from "@/stores/AuthStore";
+import { getApiBaseUrl } from "@/lib/runtime-config";
 
 export interface TerminalMessage {
   type: "input" | "output" | "resize" | "error" | "close" | "metadata";
@@ -133,8 +134,7 @@ export function useTerminal(
     connectionKeyRef.current = connectionKey;
 
     // Build WebSocket URL
-    const baseUrl =
-      process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/v1/api";
+    const baseUrl = getApiBaseUrl();
     // Convert http(s) to ws(s)
     const wsBaseUrl = baseUrl.replace(/^http/, "ws");
 

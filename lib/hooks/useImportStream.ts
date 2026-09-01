@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useAuthStore } from "@/stores/AuthStore";
+import { getApiBaseUrl } from "@/lib/runtime-config";
 
 export interface ImportLog {
   timestamp: string;
@@ -125,8 +126,7 @@ export function useImportStream(
     activeConnections.add(connectionKey);
     connectionKeyRef.current = connectionKey;
 
-    const baseUrl =
-      process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/v1/api";
+    const baseUrl = getApiBaseUrl();
     const url = `${baseUrl}/import/${sessionId}/stream`;
 
     // Get token from Zustand store

@@ -53,6 +53,10 @@ npm run dev
 
 Open http://localhost:3001
 
+Production container platforms, runtime API configuration, immutable digest
+verification, and attestations are documented in
+[docs/RELEASE.md](docs/RELEASE.md).
+
 ## 📁 Project Structure
 
 ```

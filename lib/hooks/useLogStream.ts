@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useAuthStore } from "@/stores/AuthStore";
+import { getApiBaseUrl } from "@/lib/runtime-config";
 
 export interface LogStreamMetadata {
   pod: string;
@@ -55,8 +56,7 @@ export function useLogStream(
 
     const abortController = new AbortController();
 
-    const baseUrl =
-      process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/v1/api";
+    const baseUrl = getApiBaseUrl();
     const url = `${baseUrl}/resources/${resourceId}/logs/stream?follow=${follow}&tail=${tailLines}`;
     const token = useAuthStore.getState().token;
 
