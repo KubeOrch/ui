@@ -35,6 +35,9 @@ describe("runtime configuration", () => {
     "https://user:secret@core.example/v1/api",
     "https://core.example/v1/api?token=secret",
     "https://core.example/v1/api#fragment",
+    "/\\core.example/v1/api",
+    "/foo\\bar",
+    "https://core.example/v1/api\nheader",
   ])("rejects an unsafe API URL: %s", value => {
     expect(() => normalizeApiBaseUrl(value)).toThrow();
   });

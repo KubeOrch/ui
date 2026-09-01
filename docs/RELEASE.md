@@ -36,10 +36,11 @@ container, sends API requests to the host-published Core port.
 
 ## Published Evidence
 
-The versioned image index includes BuildKit-generated SPDX SBOM and SLSA
-provenance attestations. The workflow also creates a GitHub build attestation
-for the immutable index digest. After all evidence checks pass, the same index
-is promoted to `latest` and its digest is recorded in the GitHub Release.
+The workflow first pushes a uniquely named release candidate containing
+BuildKit-generated SPDX SBOM and SLSA provenance attestations. It also creates a
+GitHub build attestation for the immutable index digest. After all evidence
+checks pass, the same index is promoted to the version tag and `latest`, and its
+digest is recorded in the GitHub Release.
 
 Use the digest from the GitHub Release instead of trusting a mutable tag:
 
@@ -75,8 +76,8 @@ pass its container and browser smoke test. Logs identify the failing platform
 and include UI or mock Core logs only on failure. The smoke environment uses no
 production credentials.
 
-If publication succeeds but manifest or attestation verification fails, the
-workflow does not update `latest` or create the GitHub Release. Inspect the
-`Verify platforms and attestations` step for an unexpected platform set,
-missing SBOM/provenance data, source revision mismatch, or GitHub attestation
-verification error.
+If candidate publication succeeds but manifest or attestation verification
+fails, the workflow does not create the version tag, update `latest`, or create
+the GitHub Release. Inspect the `Verify platforms and attestations` step for an
+unexpected platform set, missing SBOM/provenance data, source revision mismatch,
+or GitHub attestation verification error.

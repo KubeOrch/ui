@@ -15,6 +15,12 @@ export function normalizeApiBaseUrl(value: string): string {
     throw new Error("NEXT_PUBLIC_API_URL must not be empty");
   }
 
+  if (/[\u0000-\u001f\u007f\\]/.test(trimmed)) {
+    throw new Error(
+      "NEXT_PUBLIC_API_URL must not include control characters or backslashes"
+    );
+  }
+
   if (trimmed.startsWith("/")) {
     if (trimmed.startsWith("//")) {
       throw new Error("NEXT_PUBLIC_API_URL must not be protocol-relative");
