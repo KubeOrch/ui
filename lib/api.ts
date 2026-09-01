@@ -1,9 +1,9 @@
 import axios from "axios";
 import { toast } from "sonner";
 import { useAuthStore } from "@/stores/AuthStore";
+import { getApiBaseUrl } from "@/lib/runtime-config";
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -13,10 +13,12 @@ const api = axios.create({
 // Flag to prevent multiple redirects and refresh loops
 let isRedirecting = false;
 let isRefreshing = false;
-let refreshPromise: Promise<any> | null = null;
+let refreshPromise: Promise<string> | null = null;
 
 api.interceptors.request.use(
   async config => {
+    config.baseURL ??= getApiBaseUrl();
+
     // Skip token for auth endpoints
     if (config.url?.includes("/auth/")) {
       return config;

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useCallback } from "react";
 import { useAuthStore } from "@/stores/AuthStore";
+import { getApiBaseUrl } from "@/lib/runtime-config";
 import { useNotificationStore } from "@/stores/NotificationStore";
 import type { Notification } from "@/lib/services/notification";
 
@@ -34,8 +35,7 @@ export function useNotificationSSE() {
       return;
     }
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    if (!apiUrl) return;
+    const apiUrl = getApiBaseUrl();
 
     isConnectingRef.current = true;
 

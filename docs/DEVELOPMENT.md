@@ -78,7 +78,7 @@ Create a `.env.local` file for local development:
 
 ```bash
 # API Configuration
-NEXT_PUBLIC_API_URL=http://localhost:3000
+NEXT_PUBLIC_API_URL=http://localhost:3000/v1/api
 
 # Optional: Analytics, Feature Flags, etc.
 NEXT_PUBLIC_GA_ID=
@@ -166,9 +166,15 @@ npm run test:watch
 # Build the application
 npm run build
 
-# Start production server
-npm run start
+# Start production server with the browser-visible Core API URL
+NEXT_PUBLIC_API_URL=http://localhost:3000/v1/api npm run start
 ```
+
+The standalone server reads `NEXT_PUBLIC_API_URL` from a no-store initialization
+script before browser hydration. The value is not frozen into the production
+bundle, so one container image can be promoted across environments without
+rebuilding it. The container health check fails if the variable is missing or
+invalid.
 
 ### Styling
 

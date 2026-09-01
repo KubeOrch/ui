@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import api from "@/lib/api";
+import { getApiBaseUrl } from "@/lib/runtime-config";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { ProviderIcon } from "@/components/auth/ProviderIcon";
@@ -130,7 +131,7 @@ export function RegisterForm() {
   };
 
   const handleOAuthLogin = (providerName: string) => {
-    window.location.href = `${api.defaults.baseURL}/auth/oauth/${providerName}/authorize`;
+    window.location.href = `${getApiBaseUrl()}/auth/oauth/${providerName}/authorize`;
   };
 
   if (authMethodsLoading) {

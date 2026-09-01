@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useAuthStore } from "@/stores/AuthStore";
 import { Build, BuildLog, BuildStatus } from "@/lib/services/build";
+import { getApiBaseUrl } from "@/lib/runtime-config";
 
 export interface UseBuildStreamResult {
   build: Build | null;
@@ -78,8 +79,7 @@ export function useBuildStream(
     activeConnections.add(connectionKey);
     connectionKeyRef.current = connectionKey;
 
-    const baseUrl =
-      process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/v1/api";
+    const baseUrl = getApiBaseUrl();
     const url = `${baseUrl}/builds/${buildId}/stream`;
 
     // Get token from Zustand store
